@@ -93,6 +93,7 @@ def engine_recipes(version):
     """Creates a luci recipe for a given code version."""
     recipe_list = [
         "engine",
+        "engine_unopt",
         "web_engine",
         "engine_builder",
         "femu_test",
@@ -333,6 +334,16 @@ def engine_prod_config(platform_args, branch, version, ref, fuchsia_ctl_version)
         **platform_args["linux"]
     )
     common.linux_prod_builder(
+        name = builder_name("Linux%s Unopt|luopt", branch),
+        recipe = full_recipe_name("engine_unopt", version),
+        console_view_name = console_view_name,
+        properties = engine_properties(),
+        triggered_by = [trigger_name],
+        triggering_policy = triggering_policy,
+        priority = 30 if branch == "master" else 25,
+        **platform_args["linux"]
+    )
+    common.linux_prod_builder(
         name = builder_name("Linux%s Arm Host Engine|lah", branch),
         recipe = full_recipe_name("engine/engine_arm", version),
         console_view_name = console_view_name,
@@ -414,6 +425,18 @@ def engine_prod_config(platform_args, branch, version, ref, fuchsia_ctl_version)
         recipe = full_recipe_name("engine", version),
         console_view_name = console_view_name,
         properties = engine_properties(build_host = True),
+        triggered_by = [trigger_name],
+        triggering_policy = triggering_policy,
+        priority = 30 if branch == "master" else 25,
+        dimensions = {"mac_model": "Macmini8,1", "device_type": "none"},
+        execution_timeout = timeout.MEDIUM_LONG,
+        **platform_args["mac"]
+    )
+    common.mac_prod_builder(
+        name = builder_name("Mac%s Unopt|muopt", branch),
+        recipe = full_recipe_name("engine_unopt", version),
+        console_view_name = console_view_name,
+        properties = engine_properties(needs_jazzy = True),
         triggered_by = [trigger_name],
         triggering_policy = triggering_policy,
         priority = 30 if branch == "master" else 25,
@@ -510,6 +533,17 @@ def engine_prod_config(platform_args, branch, version, ref, fuchsia_ctl_version)
         recipe = full_recipe_name("engine", version),
         console_view_name = console_view_name,
         properties = engine_properties(build_host = True),
+        triggered_by = [trigger_name],
+        triggering_policy = triggering_policy,
+        priority = 30 if branch == "master" else 25,
+        dimensions = {"device_type": "none"},
+        **platform_args["windows"]
+    )
+    common.windows_prod_builder(
+        name = builder_name("Windows%s Unopt|wuopt", branch),
+        recipe = full_recipe_name("engine_unopt", version),
+        console_view_name = console_view_name,
+        properties = engine_properties(),
         triggered_by = [trigger_name],
         triggering_policy = triggering_policy,
         priority = 30 if branch == "master" else 25,
@@ -638,6 +672,17 @@ def engine_try_config(platform_args, fuchsia_ctl_version):
         **platform_args["linux"]
     )
     common.linux_try_builder(
+        name = "Linux Unopt|luopt",
+        recipe = "engine_unopt",
+        repo = repos.ENGINE,
+        add_cq = True,
+        list_view_name = list_view_name,
+        properties = engine_properties(
+            no_lto = True,
+        ),
+        **platform_args["linux"]
+    )
+    common.linux_try_builder(
         name = "Linux Arm Host Engine|lah",
         recipe = "engine/engine_arm",
         repo = repos.ENGINE,
@@ -741,6 +786,19 @@ def engine_try_config(platform_args, fuchsia_ctl_version):
         **platform_args["mac"]
     )
     common.mac_try_builder(
+        name = "Mac Unopt|muopt",
+        recipe = "engine_unopt",
+        repo = repos.ENGINE,
+        add_cq = True,
+        list_view_name = list_view_name,
+        properties = engine_properties(
+            needs_jazzy = True,
+            no_lto = True,
+        ),
+        dimensions = {"mac_model": "Macmini8,1", "device_type": "none"},
+        **platform_args["mac"]
+    )
+    common.mac_try_builder(
         name = "Mac Android Debug Engine|dbg",
         recipe = "engine",
         repo = repos.ENGINE,
@@ -798,6 +856,17 @@ def engine_try_config(platform_args, fuchsia_ctl_version):
         list_view_name = list_view_name,
         properties = engine_properties(
             build_host = True,
+            no_lto = True,
+        ),
+        **platform_args["windows"]
+    )
+    common.windows_try_builder(
+        name = "Windows Unopt|wunopt",
+        recipe = "engine_unopt",
+        repo = repos.ENGINE,
+        add_cq = True,
+        list_view_name = list_view_name,
+        properties = engine_properties(
             no_lto = True,
         ),
         **platform_args["windows"]
