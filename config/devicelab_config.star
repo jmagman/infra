@@ -399,7 +399,7 @@ def devicelab_prod_config(branch, version, ref):
             # TODO(keyonghan): adjust the timeout when devicelab linux tasks are stable:
             # https://github.com/flutter/flutter/issues/72383.
             expiration_timeout = timeout.XL,
-            execution_timeout = timeout.SHORT,
+            execution_timeout = timeout.MEDIUM,
             caches = LINUX_DEFAULT_CACHES,
             category = "Linux_android",
         )
@@ -511,7 +511,7 @@ def devicelab_prod_config(branch, version, ref):
             category = "Mac_android",
             dimensions = {"device_os": "N"},
             expiration_timeout = timeout.XL,
-            execution_timeout = timeout.SHORT,
+            execution_timeout = timeout.MEDIUM,
             caches = MAC_ANDROID_DEFAULT_CACHES,
         )
 
@@ -587,7 +587,7 @@ def devicelab_prod_config(branch, version, ref):
             os = MAC_OS,
             category = "Mac_ios",
             dimensions = {"device_os": "iOS-14.4.2"},
-            execution_timeout = timeout.SHORT,
+            execution_timeout = timeout.MEDIUM,
             expiration_timeout = timeout.LONG_EXPIRATION,
             caches = MAC_DEFAULT_CACHES,
         )
