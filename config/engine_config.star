@@ -26,7 +26,11 @@ def _setup(branches, fuchsia_ctl_version):
             "os": "Linux",
         },
         "mac": {
-            "caches": [swarming.cache(name = "flutter_cocoapods", path = "cocoapods")],
+            "caches": [
+                swarming.cache(name = "flutter_cocoapods", path = "cocoapods"),
+                # Installing osx_sdk on mac builders is slow.
+                swarming.cache("osx_sdk"),
+            ],
             "os": "Mac-10.15",
         },
         "windows": {"execution_timeout": timeout.XL, "os": "Windows-10"},
