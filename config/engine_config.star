@@ -19,6 +19,12 @@ load("//lib/timeout.star", "timeout")
 
 XCODE_VERSION = "11e708"
 
+# A max of three different xcode versions will be used across all the flutter repositories.
+# We will use "old_osx_sdk", "default_osx_sdk", and "new_osx_sdk" to reference them and avoid
+# the caches to be overriden when the bots run tasks between engine and framework if the use the
+# same named cache with diffferent version of xcode.
+OLD_XCODE_CACHE_NAME = "old_osx_sdk"
+
 def _setup(branches, fuchsia_ctl_version):
     """Default configurations for branches and repos."""
     platform_args = {
@@ -29,7 +35,7 @@ def _setup(branches, fuchsia_ctl_version):
             "caches": [
                 swarming.cache(name = "flutter_cocoapods", path = "cocoapods"),
                 # Installing osx_sdk on mac builders is slow.
-                swarming.cache("osx_sdk"),
+                swarming.cache("osx_sdk", name = OLD_XCODE_CACHE_NAME),
             ],
             "os": "Mac-10.15",
         },
