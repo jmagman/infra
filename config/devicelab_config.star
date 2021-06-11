@@ -1297,6 +1297,9 @@ def devicelab_try_config():
         caches = LINUX_DEFAULT_CACHES,
         os = LINUX_OS,
     )
+
+    # TODO(fujino): remove once https://github.com/flutter/flutter/pull/80161
+    # rolls to stable
     common.linux_try_builder(
         name = "Linux gradle_non_android_plugin_test|gnap",
         recipe = drone_recipe_name,
@@ -1479,6 +1482,9 @@ def devicelab_try_config():
         dimensions = {"device_type": "none"},
         os = MAC_OS,
     )
+
+    # TODO(fujino): remove once https://github.com/flutter/flutter/pull/80161
+    # rolls to stable
     common.mac_try_builder(
         name = "Mac gradle_non_android_plugin_test|gnap",
         recipe = drone_recipe_name,
@@ -1850,6 +1856,9 @@ def devicelab_try_config():
         caches = WIN_DEFAULT_CACHES,
         os = WINDOWS_OS,
     )
+
+    # TODO(fujino): remove once https://github.com/flutter/flutter/pull/80161
+    # rolls to stable
     common.windows_try_builder(
         name = "Windows gradle_non_android_plugin_test|gnap",
         recipe = drone_recipe_name,
