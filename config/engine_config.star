@@ -34,7 +34,7 @@ def _setup(branches, fuchsia_ctl_version):
                 # buildbucket. Removing the default "builder" cache that buildbucket would
                 # otherwise create with a 4 minute timeout preventing us from using any
                 # swarming task slice <4 minutes.
-                swarming.cache(path = "builder"),
+                swarming.cache(name = "builder_linux_engine", path = "builder"),
             ],
             "os": "Linux",
         },
@@ -47,7 +47,7 @@ def _setup(branches, fuchsia_ctl_version):
                 # buildbucket. Removing the default "builder" cache that buildbucket would
                 # otherwise create with a 4 minute timeout preventing us from using any
                 # swarming task slice <4 minutes.
-                swarming.cache(path = "builder"),
+                swarming.cache(name = "builder_mac_engine", path = "builder"),
             ],
             "os": "Mac-10.15",
         },
@@ -57,7 +57,7 @@ def _setup(branches, fuchsia_ctl_version):
                 # buildbucket. Removing the default "builder" cache that buildbucket would
                 # otherwise create with a 4 minute timeout preventing us from using any
                 # swarming task slice <4 minutes.
-                swarming.cache(path = "builder"),
+                swarming.cache(name = "builder_win_engine", path = "builder"),
             ],
             "execution_timeout": timeout.XL,
             "os": "Windows-10",

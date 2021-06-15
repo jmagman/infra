@@ -33,6 +33,8 @@ LINUX_DEFAULT_CACHES = [
     swarming.cache(name = "pub_cache", path = ".pub-cache"),
     # Flutter SDK code
     swarming.cache(name = "flutter_sdk", path = "flutter sdk"),
+    # Builder cache
+    swarming.cache(name = "builder_linux_framework", path = "builder"),
 ]
 
 # Mac caches
@@ -49,6 +51,8 @@ MAC_CORE_CACHES = [
     swarming.cache(name = "flutter_sdk", path = "flutter sdk"),
     # Xcode
     swarming.cache("xcode_binary"),
+    # Builder cache
+    swarming.cache(name = "builder_mac_framework", path = "builder"),
 ]
 
 # This is to support two versions of xcode efficiently.
@@ -69,6 +73,8 @@ WIN_DEFAULT_CACHES = [
     swarming.cache(name = "flutter_sdk", path = "flutter sdk"),
     # Visual Studio
     swarming.cache(name = "vsbuild", path = "vsbuild"),
+    # Builder cache
+    swarming.cache(name = "builder_win_framework", path = "builder"),
 ]
 
 def _setup(branches):

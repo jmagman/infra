@@ -16,6 +16,13 @@ load("//lib/repos.star", "repos")
 # Global OS variables
 LINUX_OS = "Linux"
 
+LINUX_DEFAULT_PACKAGES = [
+    swarming.cache(name = "pub_cache", path = ".pub_cache"),
+    swarming.cache(name = "android_sdk", path = "android29"),
+    # Builder cache
+    swarming.cache(name = "builder_linux_firebaselab", path = "builder"),
+]
+
 def _setup(branches):
     firebaselab_prod_config(
         "stable",
@@ -99,10 +106,7 @@ def firebaselab_prod_config(branch, version, ref):
             "dependencies": [{"dependency": "android_sdk"}],
             "task_name": "release_smoke_test",
         },
-        caches = [
-            swarming.cache(name = "pub_cache", path = ".pub_cache"),
-            swarming.cache(name = "android_sdk", path = "android29"),
-        ],
+        caches = LINUX_DEFAULT_PACKAGES,
         os = LINUX_OS,
     )
     common.linux_prod_builder(
@@ -115,10 +119,7 @@ def firebaselab_prod_config(branch, version, ref):
             "dependencies": [{"dependency": "android_sdk"}],
             "task_name": "abstract_method_smoke_test",
         },
-        caches = [
-            swarming.cache(name = "pub_cache", path = ".pub_cache"),
-            swarming.cache(name = "android_sdk", path = "android29"),
-        ],
+        caches = LINUX_DEFAULT_PACKAGES,
         os = LINUX_OS,
     )
     common.linux_prod_builder(
@@ -131,10 +132,7 @@ def firebaselab_prod_config(branch, version, ref):
             "dependencies": [{"dependency": "android_sdk"}],
             "task_name": "android_embedding_v2_smoke_test",
         },
-        caches = [
-            swarming.cache(name = "pub_cache", path = ".pub_cache"),
-            swarming.cache(name = "android_sdk", path = "android29"),
-        ],
+        caches = LINUX_DEFAULT_PACKAGES,
         os = LINUX_OS,
     )
 
@@ -162,10 +160,7 @@ def firebaselab_try_config():
             "dependencies": [{"dependency": "android_sdk"}],
             "task_name": "release_smoke_test",
         },
-        caches = [
-            swarming.cache(name = "pub_cache", path = ".pub_cache"),
-            swarming.cache(name = "android_sdk", path = "android29"),
-        ],
+        caches = LINUX_DEFAULT_PACKAGES,
         os = LINUX_OS,
     )
     common.linux_try_builder(
@@ -177,10 +172,7 @@ def firebaselab_try_config():
             "dependencies": [{"dependency": "android_sdk"}],
             "task_name": "abstract_method_smoke_test",
         },
-        caches = [
-            swarming.cache(name = "pub_cache", path = ".pub_cache"),
-            swarming.cache(name = "android_sdk", path = "android29"),
-        ],
+        caches = LINUX_DEFAULT_PACKAGES,
         os = LINUX_OS,
     )
     common.linux_try_builder(
@@ -192,10 +184,7 @@ def firebaselab_try_config():
             "dependencies": [{"dependency": "android_sdk"}],
             "task_name": "android_embedding_v2_smoke_test",
         },
-        caches = [
-            swarming.cache(name = "pub_cache", path = ".pub_cache"),
-            swarming.cache(name = "android_sdk", path = "android29"),
-        ],
+        caches = LINUX_DEFAULT_PACKAGES,
         os = LINUX_OS,
     )
 

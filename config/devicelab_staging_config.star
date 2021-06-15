@@ -29,6 +29,8 @@ LINUX_DEFAULT_CACHES = [
     swarming.cache(name = "pub_cache", path = ".pub-cache"),
     # Flutter SDK code
     swarming.cache(name = "flutter_sdk", path = "flutter sdk"),
+    # Builder
+    swarming.cache(name = "builder_linux_devicelab_staging", path = "builder"),
 ]
 
 # Default caches for Mac android builders
@@ -43,6 +45,8 @@ MAC_ANDROID_DEFAULT_CACHES = [
     swarming.cache(name = "pub_cache", path = ".pub-cache"),
     # Flutter SDK code
     swarming.cache(name = "flutter_sdk", path = "flutter sdk"),
+    # Builder
+    swarming.cache(name = "builder_mac_devicelab_staging", path = "builder"),
 ]
 
 # Default caches for Mac builders
@@ -54,6 +58,8 @@ MAC_DEFAULT_CACHES = [
     # Xcode
     swarming.cache("xcode_binary"),
     swarming.cache("osx_sdk"),
+    # Builder
+    swarming.cache(name = "builder_mac_devicelab_staging", path = "builder"),
 ]
 
 def _setup():
