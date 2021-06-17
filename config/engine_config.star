@@ -17,7 +17,7 @@ load("//lib/common.star", "common")
 load("//lib/repos.star", "repos")
 load("//lib/timeout.star", "timeout")
 
-XCODE_VERSION = "11e708"
+XCODE_VERSION = "12a7209"
 
 # A max of three different xcode versions will be used across all the flutter repositories.
 # We will use "old_osx_sdk", "default_osx_sdk", and "new_osx_sdk" to reference them and avoid
